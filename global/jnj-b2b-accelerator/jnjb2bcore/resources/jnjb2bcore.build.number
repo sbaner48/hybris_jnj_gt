@@ -1,0 +1,9 @@
+#Ant properties
+#Wed Feb 11 17:08:20 EST 2015
+builddate=20150211 1708
+description=jnjb2bcore
+name=jnjb2bcore
+releasedate=20150130 1330
+vendor=hybris
+version=5.5.0.0-M3
+version.api=5.5.0
