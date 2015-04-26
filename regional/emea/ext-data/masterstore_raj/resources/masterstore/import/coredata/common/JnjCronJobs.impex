@@ -1,0 +1,147 @@
+#Service Layer Jobs For Feed
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true];active[default='true']
+;jnjNAUpdateDeliverySalesGtinJob;jnjNAUpdateDeliverySalesGtinJob;
+;jnjNAReadSurgeonDataJob;jnjNAReadSurgeonDataJob;
+;jnjNAProcessSurgeonIntDataJob;jnjNAProcessSurgeonIntDataJob;
+;jnjNAReadOrderStatusInboundJob;jnjNAReadOrderStatusInboundJob;
+;jnjNAProcesOrderStatusInboundJob;jnjNAProcesOrderStatusInboundJob;
+;jnjNAReadShipTrackingDataJob;jnjNAReadShipTrackingDataJob;
+;jnjNAProcessShipTrackingIntDataJob;jnjNAProcessShipTrackingIntDataJob;
+#####################################################################
+########File Purging Cron Job###############
+;jnjFilePurgeCronJob;jnjFilePurgeCronJob;
+
+
+#Cron Jobs For Feed    
+INSERT_UPDATE CronJob;code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);active[default='true']
+;jnjNACustomerAlignment;jnjNACustomerAlignment;false;en;
+;jnjNASalesAlignmentRemovalJob;jnjNASalesAlignmentRemovalJob;false;en;
+##;jnjNAGenerateResetPasswordDetailsJob;jnjNAGenerateResetPasswordDetailsJob;false;en
+;jnjNACreateOrderCronJob;jnjNACreateOrderJob;false;en;
+;jnjNAEarlyZipCodeCronJob;jnjNAEarlyZipCodeJob;false;en;
+;JnjNADisableUserloginJob;JnjNADisableUserloginJob;false;en;
+;jnjNAAuditTrailCleanupDataJob;jnjNAAuditTrailCleanupDataJob;false;en;
+;jnjNAUpdateDeliverySalesGtinJob;jnjNAUpdateDeliverySalesGtinJob;false;en;
+;jnjNAReadSurgeonDataJob;jnjNAReadSurgeonDataJob;false;en;
+;jnjNAProcessSurgeonIntDataJob;jnjNAProcessSurgeonIntDataJob;false;en;
+;jnjNAReadOrderStatusInboundJob;jnjNAReadOrderStatusInboundJob;false;en;
+;jnjNAProcesOrderStatusInboundJob;jnjNAProcesOrderStatusInboundJob;false;en;
+;jnjNAReadShipTrackingDataJob;jnjNAReadShipTrackingDataJob;false;en;
+;jnjNAProcessShipTrackingIntDataJob;jnjNAProcessShipTrackingIntDataJob;false;en;
+;jnjAmazonRetryAndOrderCatalogUploadCronJob;jnjAmazonRetryAndOrderCatalogUploadCronJob;false;en;
+;jnjAmazonDeleteAmazonExpiredFilesCronJob;jnjAmazonDeleteAmazonExpiredFilesCronJob;false;en;
+;jnjZonzaFetchImageDataCronJob;jnjZonzaFetchImageDataCronJob;false;en;
+;jnjPCMIncompleteProductDetailsAlertCronJob;jnjPCMIncompleteProductDetailsAlertCronJob;false;en;
+;jnjNACaPcmProdExclCronJob;jnjNACaPcmProdExclJob;false;en;
+;jnjNAUsPcmProdExclCronJob;jnjNAUsPcmProdExclJob;false;en;
+;jnjPCMNewProductWorkflowEmailCronJob;jnjPCMNewProductWorkflowEmailCronJob;false;en;
+;jnjZonzaConvertImagesCronjob;jnjZonzaConvertImagesCronjob;false;en;
+
+
+####Cronjob for For Purging non required file##########
+;JnjFilePurgeCronJob;jnjFilePurgeCronJob;false;en;
+####Cronjob for For Registration of New PCM users##########
+;jnjPCMRequestAccountPasswordResetCronJob;jnjPCMRequestAccountPasswordResetCronJob;false;en;
+####Cronjob For hiding the inactive categories on category page##########
+;jnjPCMHideCategoryCronJob;jnjPCMHideCategoryCronJob;false;en;
+
+##################Removing Redundant synchronizeOrdersDataUploadJob########### 
+REMOVE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+
+##########################################################################
+
+
+
+
+
+#Composite Jobs
+INSERT_UPDATE CompositeCronJob;code[unique=true];job(code);sessionLanguage(isocode);active[default='true']
+
+#Composite Jobs Entries For Common Data Setup
+INSERT_UPDATE CompositeEntry;code[unique=true];compositeCronJob(code);compositeCronJobPOS[unique=true];executableCronJob(code)[unique=true];triggerableJob(code)[unique=true]
+####Start of Composite Job Entries For JnjUpsertProductCompositeJob##############################
+
+INSERT_UPDATE CronJob;code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);active[default='true']
+
+
+
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+
+
+#Triggers for CronJobs
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+
+
+
+
+############ CRON JOBS FOR FEED STG-INT ############
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId;active[default='true']
+;jnjNACustomerAlignment;jnjNACustomerAlignment;true
+;jnjNAFeedJob;jnjNAFeedJob;true
+;jnjNASalesAlignmentRemovalJob;jnjNASalesAlignmentRemovalJob;true
+;jnjNAGenerateResetPasswordDetailsJob;jnjNAGenerateResetPasswordDetailsJob;true
+;jnjNACreateOrderJob;jnjNACreateOrderJob;true
+;jnjNAEarlyZipCodeJob;jnjNAEarlyZipCodeJob;true
+;jnjNAAuditTrailCleanupDataJob;jnjNAAuditTrailCleanupDataJob;true
+;jnjNACaPcmProdExclJob;jnjNACaPcmProdExclJob;true
+;jnjNAUsPcmProdExclJob;jnjNAUsPcmProdExclJob;true
+;JnjNADisableUserloginJob;JnjNADisableUserloginJob;true
+
+###start CR 119####
+INSERT_UPDATE JnjNAUserResetPwdCronJob;code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);active[default='true'];resetPwdJobAction(code)[default='SEND_ACTIVATION_EMAIL']
+;JnjNAGenerateResetJob;jnjNAGenerateResetPasswordDetailsJob;false;en;;
+###End CR 119#####
+
+INSERT_UPDATE JnjInterfaceCronJob;code[unique=true];job(code);active[default='true'];sessionLanguage(isocode);impexFile;facadeBean;associatedStgTables;recordsLoadingStatus(code)[default='STAGE_TO_INTERMEDIATE']
+;tempCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/sample.impex;tempImplementaion;
+;jnjNAB2BUnitCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/b2bUnitFeedImpexCronJob.impex;b2bUnitFacade;STG_CUSTOMER,STG_CUSTOMER_SORG,STG_PARTNER_FUNC,STG_AFFILIATION
+;jnjNAB2BUnitLocalCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/b2bUnitLocalFeedImpexCronJob.impex;b2bUnitLocalFacade;STG_CUSTOMER_LOCAL
+;jnjNAAffiliationCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/affiliationFeedImpexCronJob.impex;affiliationFacade;STG_AFFILIATION
+;jnjNASalesRepAlignmentCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/salesRepAlignmentFeedImpexCronJob.impex;salesRepFacade;STG_ALGN_ORG_AFFLN_EXTR_FF,STG_ALGN_CUST_AFFLN_EXTR_FF,STG_ALGN_SREP_AFFLN_EXTR_FF,STG_ALGN_PROD_AFFLN_EXTR_FF
+;jnjNATerritoryCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/territoryFeedImpexCronJob.impex;territoryFacade;STG_TERRITORY
+;jnjNAProductListPriceCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/jnjNAProductListPriceFeed.impex;jnjNAIntProductListPriceFacade;STG_LISTPRICE_LOCLM,STG_LISTPRICE_LOCLC,STG_LISTPRICE_AMT_LOCLM,STG_LISTPRICE_AMT_LOCLC
+;jnjNAProductMasterFeedCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/jnjNAProductMasterFeed.impex;jnjNAIntProductMasterFacade;STG_PRODUCT,STG_PRODUCT_KIT,STG_PRODUCT_REG,STG_PRODUCT_DESC,STG_PRODUCT_SORG,STG_PRODUCT_PLNT,STG_PRODUCT_UNIT,STG_PRODUCT_UNIT_LOCL
+;jnjNAProductLocalFeedCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/jnjNAProductLocalFeed.impex;jnjNAIntProductLocalFacade;STG_PRODUCT_LOCL,STG_PRODUCT_LOCL_PLNT
+;jnjNACpsiaFeedCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/jnjNAProductCpsiaFeed.impex;jnjNAIntCpsiaFacade;STG_CPSIA
+;jnjNAProductLotMasterFeedCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/jnjNAProductLotMasterFeed.impex;jnjNAIntProductLotMasterFacade;STG_LOT_MASTER
+;jnjNAUserProfileFeedCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/jnjNAUserProfileFeed.impex;jnjNAIntUserProfileFacade;STG_USER,STG_USER_PERMISSIONS,STG_USER_CUSTOMERS,STG_USER_ORGS
+;jnjNAOrderTemplateFeedCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/jnjNAOrderTemplateFeed.impex;jnjNAIntOrderTemplateFacade;STG_ORDER_TEMPLATE,STG_ORDER_LINES
+;jnjNACreditCardFeedCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/jnjNACreditCardFeed.impex;jnjNAIntCreditCardFacade;STG_CREDIT_CARD_TOKEN
+;jnjNAProductExclusionCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/productExclusionFeedImpexCronJob.impex;productExclusionFacade;STG_PRODUCT_EXCLUSIONS
+;jnjNAInvoiceFeedCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/jnjNAInvoiceFeed.impex;jnjNAIntInvoiceFacade;STG_INVOICE_HEADER,STG_INVOICE_HEADER_PRICE,STG_INVOICE_LINE,STG_INVOICE_LINE_LOT
+;jnjNAOrderSyncCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/orderSyncFeedImpexCronJob.impex;orderFacade;STG_ORDER_HEADER,STG_ORDER_HEADER_NOTE,STG_ORDER_LINE,STG_ORDER_LINE_HOLD_LOCL,STG_ORDER_LINE_PRICE_LOCL,STG_ORDER_LINE_SCH,STG_ORDER_LINE_TEXT,STG_ORDER_LINE_PART
+;jnjNAShipmentCronJob;jnjNAFeedJob;true;en;/jnjnab2binboundservice/import/feed/shipmentFeedImpexCronJob.impex;shipmentFacade;STG_SHIP_TRACK_HEADER_LOCL,STG_SHIP_TRACK_LINE_LOCL,STG_SHIP_TRACK_HEADER,STG_SHIP_TRACK_LINE
+
+############ CRON JOB FOR Full Product Export For PCM############
+INSERT_UPDATE JnjPCMFullCatalogUploadCronJob;code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);active[default='true'];processedCountries(code)[default='ALL']
+;jnjPCMAmazonRetryAndFullUploadCronJob;jnjAmazonRetryAndFullUploadCronJob;false;en;;
+
+#Triggers for CronJobs
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+#;jnjNASalesAlignmentRemovalJob;0;0;0;-1;-1;-1;false;true;-1
+#;jnjNAAuditTrailCleanupDataJob;0;0;0;-1;-1;-1;false;true;-1
+#;jnjNACustomerAlignment;0;0;0;-1;-1;-1;false;true;-1
+#;JnjNADisableUserloginJob;0;0;0;-1;-1;-1;false;true;-1
+
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+# Run the JnjFilePurgeCronJob at 05:00 on Last(L) Saturday( * 7 i.e. 7th day) of every month(?)
+#;JnjFilePurgeCronJob;0 0 5 ? * 7L
+
+################################################################
+#######SolrIndexerCronJob#######################################
+#################################################################
+INSERT_UPDATE SolrIndexerCronJob;code[unique=true];job(code);facetSearchConfig(name)[unique=true];indexerOperation(code);sessionLanguage(isocode);active[default='true']
+;JnjNAPCMCAFullIndexCronJob;solrIndexerJob;jnjNAPCMCAIndex;full;en;
+;JnjNAPCMCAUpdateIndexCronJob;solrIndexerJob;jnjNAPCMCAIndex;update;en;
+;JnjNAPCMCADeleteIndexCronJob;solrIndexerJob;jnjNAPCMCAIndex;delete;en;
+;JnjNAPCMUSFullIndexCronJob;solrIndexerJob;jnjNAPCMUSIndex;full;en;
+;JnjNAPCMUSUpdateIndexCronJob;solrIndexerJob;jnjNAPCMUSIndex;update;en;
+;JnjNAPCMUSDeleteIndexCronJob;solrIndexerJob;jnjNAPCMUSIndex;delete;en;
+;JnjNAMddFullIndexCronJob;solrIndexerJob;jnjNAMddIndex;full;en;
+;JnjNAMddUpdateIndexCronJob;solrIndexerJob;jnjNAMddIndex;update;en;
+;JnjNAMddDeleteIndexCronJob;solrIndexerJob;jnjNAMddIndex;delete;en;
+;JnjNAConsFullIndexCronJob;solrIndexerJob;jnjNAConsIndex;full;en;
+;JnjNAConsUpdateIndexCronJob;solrIndexerJob;jnjNAConsIndex;update;en;
+;JnjNAConsDeleteIndexCronJob;solrIndexerJob;jnjNAConsIndex;delete;en;
+###############################################################

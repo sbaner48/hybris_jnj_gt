@@ -1,0 +1,10 @@
+#
+# Create the JNJ MDD Product Catalog
+#
+
+# Language
+$lang=en
+
+# Create Catalog
+UPDATE Catalog;id[unique=true];name[lang=$lang]
+ ;mddProductCatalog;"MDD Product Catalog"

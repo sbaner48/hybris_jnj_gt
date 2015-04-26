@@ -1,0 +1,18 @@
+# 
+# Create the JNJ MDD-DE BaseStore
+#
+
+$productCatalog=mddProductCatalog
+#$currencies=EUR
+#$net=true
+$storeUid=mdd-deBaseStore
+$defaultCurrency=EUR
+$languages=de
+$defaultLanguage=de
+$deliveryCountries=DE
+$submitOrderProcessCode=order-process
+#$paymentProvider=Mockup
+
+# Base Store 
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);submitOrderProcessCode
+;$storeUid;$productCatalog;$defaultCurrency;$defaultCurrency;$languages;$defaultLanguage;$deliveryCountries;$submitOrderProcessCode

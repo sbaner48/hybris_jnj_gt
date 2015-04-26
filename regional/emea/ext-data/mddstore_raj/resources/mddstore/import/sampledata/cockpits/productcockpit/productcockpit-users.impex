@@ -1,0 +1,11 @@
+#
+# Import Users and Groups for Product Cockpit
+# 
+
+
+$MDDproductCatalog=mddProductCatalog
+
+UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];writePrincipals(uid);
+#;$MDDproductCatalog;Online;productmanagergroup,productmanager;
+#;$MDDproductCatalog;Staged;productmanagergroup,productmanager;
+

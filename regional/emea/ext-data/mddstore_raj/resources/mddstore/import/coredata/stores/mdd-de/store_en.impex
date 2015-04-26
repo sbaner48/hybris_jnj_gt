@@ -1,0 +1,10 @@
+#
+# Import the JNJ MDD DE Store
+#
+
+# Language
+$lang=en
+
+# Create Base Store
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+ ;mdd-deBaseStore;"JNJ EPIC MDD DE Store"

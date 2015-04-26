@@ -1,0 +1,831 @@
+## messageSource=classpath:/jnjcore/messages/email-orderApprovalRejection_$lang.properties
+#macro( genHtmlBoldFont $text )
+<font color="#414a4f" size="2" face="Arial, Helvetica, sans-serif"><b>$text</b></font>
+#end
+#macro(genHtmlLinkStartTag $url)
+<a href="$url"><font color="#666666">
+#end
+#macro(genHtmlLinkEndTag)
+</font></a>
+#end
+#macro(genHtmlLink $url $textColor $bodyContent)
+<a href="$url"><font color="$textColor">$bodyContent</font></a>
+#end
+
+<style>
+input.span-18 {
+	border-left-width: 1px;
+    border-right-width: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+	width: 698px;
+}
+.blank_row
+{
+    height: 20px
+    background-color: #FFFFFF;
+}	
+.last {
+    margin-right: 0;
+    padding-right: 0;
+}
+.interfaceNotificationBody h2.arrowHeader span {
+    float: right;
+}
+.interfaceNotificationBody ul {
+    margin: 10px 0 20px;
+    padding-bottom: 10px;
+}
+.interfaceNotificationBody ul li {
+    clear: both;
+    margin-top: 10px;
+    min-height: 58px;
+}
+.interfaceNotificationBody label {
+    display: block;
+}
+.interfaceNotificationBody label span {
+    color: #B41601;
+}
+.interfaceNotificationBody input[type="text"], .interfaceNotificationBody select {
+    color: #646464;
+    padding-left: 2px;
+    width: 420px;
+}
+.interfaceNotificationBody select {
+    color: #646464;
+    float: none;
+    margin-bottom: 0;
+    width: 230px;
+}
+.radioPanel label {
+    display: inline;
+}
+.radioPanel input[type="text"] {
+    display: block;
+    margin: 4px 0;
+}
+.radioPanel input[type="radio"] {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    margin-bottom: 0;
+}
+.interfaceNotificationBody input, .interfaceNotificationBody select {
+    padding: 0;
+}
+.interfaceNotificationBody select {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #E5E5E5;
+    padding-bottom: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+.interfaceNotificationBody .buttonWrapper > input {
+    padding: 5px 15px;
+}
+h2.arrowHeader {
+    border-bottom: 1px solid #84C5D4;
+    color: #0A8CAA;
+    font-size: 16px;
+    line-height: 30px;
+    margin-bottom: 0;
+}
+.priceSmall {
+    color: #B41601;
+    font-size: 12px;
+}
+.instructiontxt {
+    color: #828282;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+body {
+    line-height: 1.5;
+}
+body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, nav, section {
+    border: 0 none;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+body {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #222222;
+    font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-size: 75%;
+}
+ul li {
+    color: #646464;
+    font-size: 12px;
+    list-style-type: none;
+}
+td {
+	color: #646464;
+}
+
+table.readDashboard
+{
+	background:#EEE;
+	color:#333;
+	font-size:12px;
+	font: 'Arial';
+	text-align:center;
+}
+
+table.readDashboard th
+{
+	background:#CCC;
+	font-weight:bold;
+}
+</style>
+<html>
+<head>
+	<title>Confirmation Email</title>
+</head>
+<body id="containerBody">
+	<table style="background-color:#ffffff" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+		<tr>
+			<td align="center">
+				<table bgcolor="#ffffff" width="1200" border="0" cellspacing="0" cellpadding="0" align="center">
+					<tr bgcolor="#ffffff">
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td height="11">
+							<div style="width:578;height:11" />
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr bgcolor="#ffffff">
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td>
+							<a href="#logo">
+								<img src="logo.gif" width="333" height="84" border="0" />
+							</a>
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+
+					<tr class="blank_row">	
+						<td colspan="3">&nbsp;</td>
+					</tr>
+						
+					<br>
+					<tr>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td>
+							<h2 class="arrowHeader">ORDER STATUS CHANGE/CONFIRMATION MAIL</h2>
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td height="11">
+							<div style="width:578;height:11" />
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<!-- INSERT HERE -->
+						<td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#828282;">
+							<div class="span-18 last" id="addindirectcustomer" style="display:block">
+								<div class="interfaceNotificationBody ">
+									<!-- STANDARD ORDER ZOR -->
+									#if($ctx.orderData.orderType == "ZOR")
+										<ul>
+											#if(${ctx.orderData.orderNumber})
+											<li>SAP Order Number - ${ctx.orderData.orderNumber}</li>
+											#end
+											#if(${ctx.orderData.status})
+											<li>Order Status - ${ctx.orderData.status}</li>
+											#end
+											#if(${ctx.orderData.orderType})
+											<li>Order Type - Standard Order</li>
+											#end
+											#if(${ctx.orderData.accountNumber})
+											<li>Account Number - ${ctx.orderData.accountNumber}</li>
+											#end
+											#if(${ctx.orderData.gln})
+											<li>Global Location Number - ${ctx.orderData.gln}</li>
+											#end
+											#if(${ctx.orderData.billingAddress.companyName})
+											<li>Billing Name - ${ctx.orderData.billingAddress.companyName}</li>
+											#end
+											#if(${ctx.orderData.billingAddress.formattedAddress})
+											<li>Billing Address - ${ctx.orderData.billingAddress.formattedAddress}</li>
+											#end
+											#if(${ctx.orderData.paymentType.displayName})
+											<li>Payment Type - ${ctx.orderData.paymentType.displayName}</li>
+											#end
+											#if(${ctx.orderData.paymentInfo.cardNumber})
+											<li>Credit Card information - ${ctx.orderData.paymentInfo.cardNumber}</li>
+											#end
+											#if(${ctx.orderData.purchaseOrderNumber})
+											<li>PO # - ${ctx.orderData.purchaseOrderNumber}</li>
+											#end
+											#if(${ctx.orderData.distributorPONumber})
+											<li>Distributor PO # - ${ctx.orderData.distributorPONumber}</li>
+											#end
+											#if(${ctx.orderData.dropShipAccount})
+											<li>Drop Ship Account Number - ${ctx.orderData.dropShipAccount}</li>
+											#end
+											#if(${ctx.orderData.shipToAddress.formattedAddress})
+											<li>Shipping Address - ${ctx.orderData.shipToAddress.formattedAddress}</li>
+											#end
+											#if(${ctx.orderData.attention})
+											<li>Attention Line - ${ctx.orderData.attention}</li>
+											#end
+											#if($ctx.orderDetailUrl)
+											<li>Link to Order Details - $ctx.orderDetailUrl</li>
+											#end
+										</ul>
+										#if($ctx.orderData.entries.size() > 0)
+											<table class="productDetailsTable">
+												<tr>
+													<td style="border: 1px solid black;border-collapse: collapse;">Line Status</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Product Name</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">J&J ID</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">GTIN</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Hazmat Message</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Lot Comment</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Ship Unit of Measure</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">UOM of Eaches</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Quantity</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Contract Number</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Shipping Method</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Estimated Ship Date</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Estimated Delivery Date</td>
+												</tr>
+												#foreach($entry in ${ctx.orderData.entries} )
+													<tr>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.status)$entry.status#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.name)$entry.product.name#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.code)$entry.product.code#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.gtin)$entry.product.gtin#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.hazmatCode)$entry.product.hazmatCode#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.lotComment)$entry.lotComment#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.deliveryUnit)$entry.product.deliveryUnit#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.salesUnit)$entry.product.salesUnit#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.quantity)$entry.quantity#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.contractNumber)$entry.contractNumber#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.shippingMethod)$entry.shippingMethod#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.scheduleLines && $entry.scheduleLines.get(0) && $entry.scheduleLines.get(0).shippingDate)$entry.scheduleLines.get(0).shippingDate#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.scheduleLines && $entry.scheduleLines.get(0) && $entry.scheduleLines.get(0).deliveryDate)$entry.scheduleLines.get(0).deliveryDate#end</td>
+													</tr>
+												#end
+											</table>
+										#end
+									#end
+									<!-- International ORDER ZEX -->
+									#if($ctx.orderData.orderType == "ZEX")
+										<ul>	
+											#if(${ctx.orderData.orderNumber})
+											<li>SAP Order Number - ${ctx.orderData.orderNumber}</li>
+											#end
+											#if(${ctx.orderData.status})
+											<li>Order Status - ${ctx.orderData.status}</li>
+											#end
+											#if(${ctx.orderData.orderType})
+											<li>Order Type - International Order</li>
+											#end
+											#if(${ctx.orderData.accountNumber})
+											<li>Account Number - ${ctx.orderData.accountNumber}</li>
+											#end
+											#if(${ctx.orderData.gln})
+											<li>Global Location Number - ${ctx.orderData.gln}</li>
+											#end
+											#if(${ctx.orderData.billingAddress.companyName})
+											<li>Billing Name - ${ctx.orderData.billingAddress.companyName}</li>
+											#end
+											#if(${ctx.orderData.billingAddress.formattedAddress})
+											<li>Billing Address - ${ctx.orderData.billingAddress.formattedAddress}</li>
+											#end
+											#if(${ctx.orderData.paymentType.displayName})
+											<li>Payment Type - ${ctx.orderData.paymentType.displayName}</li>
+											#end
+											#if(${ctx.orderData.purchaseOrderNumber})
+											<li>PO # - ${ctx.orderData.purchaseOrderNumber}</li>
+											#end
+											#if(${ctx.orderData.shipToAddress.formattedAddress})
+											<li>Shipping Address - ${ctx.orderData.shipToAddress.formattedAddress}</li>
+											#end
+											#if(${ctx.orderData.attention})
+											<li>Attention Line - ${ctx.orderData.attention}</li>
+											#end
+											#if($ctx.orderDetailUrl)
+											<li>Link to Order Details - $ctx.orderDetailUrl </li>
+											#end
+										</ul>
+										#if($ctx.orderData.entries.size() > 0)
+											<table class="productDetailsTable">
+												<tr>
+													<td style="border: 1px solid black;border-collapse: collapse;">Line Status</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Product Name</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">J&J ID</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">GTIN</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Hazmat Message</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Lot Comment</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Ship Unit of Measure</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">UOM of Eaches</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Quantity</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Shipping Method</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Estimated Ship Date</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Estimated Delivery Date</td>
+												</tr>
+												#foreach($entry in ${ctx.orderData.entries} )
+													<tr>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.status)$entry.status#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.name)$entry.product.name#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.code)$entry.product.code#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.gtin)$entry.product.gtin#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.hazmatCode)$entry.product.hazmatCode#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.lotComment)$entry.lotComment#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.deliveryUnit)$entry.product.deliveryUnit#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.salesUnit)$entry.product.salesUnit#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.quantity)$entry.quantity#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.shippingMethod)$entry.shippingMethod#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.scheduleLines && $entry.scheduleLines.get(0) && $entry.scheduleLines.get(0).shippingDate)$entry.scheduleLines.get(0).shippingDate#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.scheduleLines && $entry.scheduleLines.get(0) && $entry.scheduleLines.get(0).deliveryDate)$entry.scheduleLines.get(0).deliveryDate#end</td>
+													</tr>
+												#end
+											</table>
+										#end
+									#end
+									<!-- NO charge ORDER ZNC -->
+									#if($ctx.orderData.orderType == "ZNC")
+										<ul>	
+											#if(${ctx.orderData.orderNumber})
+											<li>SAP Order Number - ${ctx.orderData.orderNumber}</li>
+											#end
+											#if(${ctx.orderData.status})
+											<li>Order Status - ${ctx.orderData.status}</li>
+											#end
+											#if(${ctx.orderData.orderType})
+											<li>Order Type - No Charge Order</li>
+											#end
+											#if(${ctx.orderData.accountNumber})
+											<li>Account Number - ${ctx.orderData.accountNumber}</li>
+											#end
+											#if(${ctx.orderData.gln})
+											<li>Global Location Number - ${ctx.orderData.gln}</li>
+											#end
+											#if(${ctx.orderData.billingAddress.companyName})
+											<li>Billing Name - ${ctx.orderData.billingAddress.companyName}</li>
+											#end
+											#if(${ctx.orderData.billingAddress.formattedAddress})
+											<li>Billing Address - ${ctx.orderData.billingAddress.formattedAddress}</li>
+											#end
+											#if(${ctx.orderData.reasonCode})
+											<li>Reason Code - ${ctx.orderData.reasonCode}</li>
+											#end
+											#if(${ctx.orderData.purchaseOrderNumber})
+											<li>PO # - ${ctx.orderData.purchaseOrderNumber}</li>
+											#end
+											#if(${ctx.orderData.dropShipAccount})
+											<li>Drop Ship Account # - ${ctx.orderData.dropShipAccount}</li>
+											#end
+											#if(${ctx.orderData.shipToAddress.formattedAddress})
+											<li>Shipping Address - ${ctx.orderData.shipToAddress.formattedAddress}</li>
+											#end
+											#if(${ctx.orderData.attention})
+											<li>Attention Line - ${ctx.orderData.attention}</li>
+											#end
+											#if(${ctx.orderData.cordisHouseAccount})
+											<li>Cordis House Account - ${ctx.orderData.cordisHouseAccount}</li>
+											#end
+											#if($ctx.orderDetailUrl)
+											<li>Link to Order Details - $ctx.orderDetailUrl </li>
+											#end
+										</ul>
+										#if($ctx.orderData.entries.size() > 0)
+											<table class="productDetailsTable">
+												<tr>
+													<td style="border: 1px solid black;border-collapse: collapse;">Line Status</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Product Name</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">J&J ID</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">GTIN</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Hazmat Message</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Lot Comment</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Ship Unit of Measure</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">UOM of Eaches</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Quantity</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Shipping Method</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Estimated Ship Date</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Estimated Delivery Date</td>
+												</tr>
+												#foreach($entry in ${ctx.orderData.entries} )
+													<tr>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.status)$entry.status#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.name)$entry.product.name#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.code)$entry.product.code#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.gtin)$entry.product.gtin#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.hazmatCode)$entry.product.hazmatCode#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.lotComment)$entry.lotComment#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.deliveryUnit)$entry.product.deliveryUnit#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.salesUnit)$entry.product.salesUnit#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.quantity)$entry.quantity#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.shippingMethod)$entry.shippingMethod#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.scheduleLines && $entry.scheduleLines.get(0) && $entry.scheduleLines.get(0).shippingDate)$entry.scheduleLines.get(0).shippingDate#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.scheduleLines && $entry.scheduleLines.get(0) && $entry.scheduleLines.get(0).deliveryDate)$entry.scheduleLines.get(0).deliveryDate#end</td>
+													</tr>
+												#end
+											</table>
+										#end
+									#end
+									<!-- Replenishment Order ZKB -->
+									#if($ctx.orderData.orderType == "ZKB")
+										<ul>
+											#if(${ctx.orderData.orderNumber})
+											<li>SAP Order Number - ${ctx.orderData.orderNumber}</li>
+											#end
+											#if(${ctx.orderData.status})
+											<li>Order Status - ${ctx.orderData.status}</li>
+											#end
+											#if(${ctx.orderData.orderType})
+											<li>Order Type - Replenishment Order</li>
+											#end
+											#if(${ctx.orderData.accountNumber})
+											<li>Account Number - ${ctx.orderData.accountNumber}</li>
+											#end
+											#if(${ctx.orderData.gln})
+											<li>Global Location Number - ${ctx.orderData.gln}</li>
+											#end
+											#if(${ctx.orderData.billingAddress.companyName})
+											<li>Billing Name - ${ctx.orderData.billingAddress.companyName}</li>
+											#end
+											#if(${ctx.orderData.billingAddress.formattedAddress})
+											<li>Billing Address - ${ctx.orderData.billingAddress.formattedAddress}</li>
+											#end
+											#if(${ctx.orderData.purchaseOrderNumber})
+											<li>PO # - ${ctx.orderData.purchaseOrderNumber}</li>
+											#end
+											#if(${ctx.orderData.dropShipAccount})
+											<li>Drop Ship Account # - ${ctx.orderData.dropShipAccount}</li>
+											#end
+											#if(${ctx.orderData.shipToAddress.formattedAddress})
+											<li>Shipping Address - ${ctx.orderData.shipToAddress.formattedAddress}</li>
+											#end
+											#if(${ctx.orderData.attention})
+											<li>Attention Line - ${ctx.orderData.attention}</li>
+											#end
+											#if(${ctx.orderData.cordisHouseAccount})
+											<li>Cordis House Account - ${ctx.orderData.cordisHouseAccount}</li>
+											#end
+											#if($ctx.orderDetailUrl)
+											<li>Link to Order Details - $ctx.orderDetailUrl </li>
+											#end
+										</ul>
+										#if($ctx.orderData.entries.size() > 0)
+											<table class="productDetailsTable">
+												<tr>
+													<td style="border: 1px solid black;border-collapse: collapse;">Line Status</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Product Name</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">J&J ID</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">GTIN</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Hazmat Message</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Ship Unit of Measure</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">UOM of Eaches</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Quantity</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Shipping Method</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Estimated Ship Date</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Estimated Delivery Date</td>
+												</tr>
+												#foreach($entry in ${ctx.orderData.entries} )
+													<tr>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.status)$entry.status#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.name)$entry.product.name#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.code)$entry.product.code#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.gtin)$entry.product.gtin#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.hazmatCode)$entry.product.hazmatCode#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.deliveryUnit)$entry.product.deliveryUnit#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.salesUnit)$entry.product.salesUnit#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.quantity)$entry.quantity#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.shippingMethod)$entry.shippingMethod#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.scheduleLines && $entry.scheduleLines.get(0) && $entry.scheduleLines.get(0).shippingDate)$entry.scheduleLines.get(0).shippingDate#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.scheduleLines && $entry.scheduleLines.get(0) && $entry.scheduleLines.get(0).deliveryDate)$entry.scheduleLines.get(0).deliveryDate#end</td>
+													</tr>
+												#end
+											</table>
+										#end
+									#end
+									<!-- Return Order ZRE -->
+									#if($ctx.orderData.orderType == "ZRE")
+										<ul>
+											#if(${ctx.orderData.status})
+											<li>Order Status - ${ctx.orderData.status}</li>
+											#end
+											#if(${ctx.orderData.orderType})
+											<li>Order Type - Return</li>
+											#end
+											#if(${ctx.orderData.reasonCode})
+											<li>Reason Code - ${ctx.orderData.reasonCode}</li>
+											#end
+											#if(${ctx.orderData.accountNumber})
+											<li>Account Number - ${ctx.orderData.accountNumber}</li>
+											#end
+											#if(${ctx.orderData.gln})
+											<li>Global Location Number - ${ctx.orderData.gln}</li>
+											#end
+											#if(${ctx.orderData.customerPoNumber})
+											<li>Customer Reference PO - ${ctx.orderData.customerPoNumber}</li>
+											#end
+											#if(${ctx.orderData.orderNumber})
+											<li>Return Goods Authorization Number - ${ctx.orderData.orderNumber}</li>
+											#end
+										</ul>
+										#if($ctx.orderData.entries.size() > 0)
+											<table class="productDetailsTable">
+												<tr>
+													<td style="border: 1px solid black;border-collapse: collapse;">Product Name</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">J&J ID</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">GTIN</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Quantity</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Lot Number</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Customer PO #</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Invoice #</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Reason for Rejection</td>
+												</tr>
+												#foreach($entry in ${ctx.orderData.entries} )
+													<tr>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.name)$entry.product.name#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.code)$entry.product.code#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.gtin)$entry.product.gtin#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.quantity)$entry.quantity#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.lotNumber)$entry.lotNumber#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.poNumber)$entry.product.poNumber#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.invoiceNumber)$entry.product.invoiceNumber#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.rejectionReason)$entry.product.rejectionReason#end</td>
+													</tr>
+												#end
+											</table>
+										#end
+									#end
+									<!-- Delivered Order ZDEL -->
+									#if($ctx.orderData.orderType == "ZDEL")
+										<ul>
+											#if(${ctx.orderData.orderNumber})
+											<li>SAP Order Number - ${ctx.orderData.orderNumber}</li>
+											#end
+											#if(${ctx.orderData.status})
+											<li>Order Status - ${ctx.orderData.status}</li>
+											#end
+											#if($ctx.orderDetailUrl)
+											<li>Link to Order Details - $ctx.orderDetailUrl </li>
+											#end
+										</ul>
+									#end
+									<!-- Delivered Order ZDEL -->
+									#if($ctx.orderData.orderType == "ZHOR" || $ctx.orderData.orderType == "ZTOR" || $ctx.orderData.orderType == "ZIO2")
+										<ul>
+											#if(${ctx.orderData.orderNumber})
+											<li>SAP Order Number - ${ctx.orderData.orderNumber}</li>
+											#end
+											#if(${ctx.orderData.status})
+											<li>Order Status - ${ctx.orderData.status}</li>
+											#end
+											#if(${ctx.orderData.reasonCode})
+											<li>Reason Code - ${ctx.orderData.reasonCode}</li>
+											#end
+											#if(${ctx.orderData.purchaseOrderNumber})
+											<li>PO # - ${ctx.orderData.purchaseOrderNumber}</li>
+											#end
+											#if(${ctx.orderData.shipToAddress.formattedAddress})
+											<li>Shipping Address - ${ctx.orderData.shipToAddress.formattedAddress}</li>
+											#end
+											#if(${ctx.orderData.soldToAccount})
+											<li>Sold-To Account Number - ${ctx.orderData.soldToAccount}</li>
+											#end
+											#if(${ctx.orderData.b2bUnitName})
+											<li>Sold-To Name - ${ctx.orderData.b2bUnitName}</li>
+											#end
+											#if(${ctx.orderData.shipToAddress.formattedAddress})
+											<li>Sold-To Address - ${ctx.orderData.shipToAddress.formattedAddress}</li>
+											#end
+											#if(${ctx.orderData.shipToAddress.companyName})
+											<li>Ship-To Account Name - ${ctx.orderData.shipToAddress.companyName}</li>
+											#end
+											#if(${ctx.orderData.requestedDeliveryDate})
+											<li>Requested Delivery Date - ${ctx.orderData.requestedDeliveryDate}</li>
+											#end
+											#if($ctx.orderDetailUrl)
+											<li>Link to Order Details - $ctx.orderDetailUrl </li>
+											#end
+										</ul>
+										#if($ctx.orderData.entries.size() > 0)
+											<table class="productDetailsTable">
+												<tr>
+													<td style="border: 1px solid black;border-collapse: collapse;">Product Name</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">J&J ID</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">UPC</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Ship Unit of Measure</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">UOM of Eaches</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Weight</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Cubic Volume</td>
+													<td style="border: 1px solid black;border-collapse: collapse;">Quantity</td>
+												</tr>
+												#foreach($entry in ${ctx.orderData.entries} )
+													<tr>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.name)$entry.product.name#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.code)$entry.product.code#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.upc)$entry.product.upc#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.deliveryUnit)$entry.product.deliveryUnit#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.salesUnit)$entry.product.salesUnit#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.orderWeight)$entry.product.orderWeight#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.product.cubicVolume)$entry.product.cubicVolume#end</td>
+														<td style="border: 1px solid black;border-collapse: collapse;">#if($entry.quantity)$entry.quantity#end</td>
+													</tr>
+												#end
+											</table>
+										#end
+									#end
+								</div>
+							</div>
+							<!-- Content Ends -->
+						</td>
+						<td width="11" height="11">
+						
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td height="11">
+							<div style="width:578;height:11" />
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#828282;">
+							<br />If you are unable to view this email please <a href="$ctx.orderDetailUrl" style="color:#12C2E9"><font color="#12C2E9">click here</font></a>
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td height="11">
+							<div style="width:578;height:11" />
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr bgcolor="#fafafa">
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td height="11">
+							<div style="width:578;height:11" />
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr bgcolor="#fafafa">
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#828282;">You are about to enter a Private Web Site that is restricted to authorized use by Johnson &amp; Johnson Medical Devices and Diagnostics for Latin America and their authorized agents for business purposes only. The actual or attempted unauthorized
+							access, use or modification of the web site and its contents is strictly prohibited by the Company. Unauthorized users and/or unauthorized use are subject to criminal and/or civil penalties in accordance with applicable domestic and foreign laws.
+							<br
+							/>
+							<br />The use of this web site may be monitored and recorded for administrative and security reasons. If such monitoring and/or recording reveals possible evidence of criminal activity, the Company may provide the monitored evidence of such activity
+							to law enforcement officials. Access to this application from an untrusted workstation, including, but not limited to, cyber cafes and public kiosks, is prohibited.
+							<br />&nbsp;
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td height="11">
+							<div style="width:578;height:11" />
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td align="left" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#828282;">Please read our <a href="#" style="color:#12C2E9"><font color="#12C2E9">Privacy Policy</font></a>. The use of information on this site is under the terms of our <a href="#" style="color:#12C2E9"><font color="#12C2E9">Legal Notice</font></a>
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td align="left" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#828282;">Last Update: November 2013</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td height="11">
+							<div style="width:578;height:11" />
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr bgcolor="#0A8CAA">
+						<td width="11" height="5">
+							<div style="width:11;height:5" />
+						</td>
+						<td height="5">
+							<div style="width:578;height:5" />
+						</td>
+						<td width="11" height="5">
+							<div style="width:11;height:5" />
+						</td>
+					</tr>
+					<tr bgcolor="#e5e5e5">
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td height="11">
+							<div style="width:578;height:11" />
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr bgcolor="#e5e5e5">
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td align="left" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#828282;">This site is published by Johnson and Johnson Medical Devices and Diagnostics - Latin America, L.L.C. which is solely responsible for its contents and is destined for the use of the Johnson &amp; Johnson family of companies employees and customers
+										in Latin America.
+										<br />
+										<br />All Contents &copy;Johnson and Johnson Medical Devices and Diagnostics - Latin America, L.L.C. 2009 - 2013. All Rights Reserved.
+										</div>
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+					<tr bgcolor="#e5e5e5">
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+						<td height="11">
+							<div style="width:578;height:11" />
+						</td>
+						<td width="11" height="11">
+							<div style="width:11;height:11" />
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

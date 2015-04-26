@@ -1,0 +1,10 @@
+#
+# Import Users and Groups for CMS Cockpit
+# 
+
+$MDDContentCatalog=mdd-deContentCatalog
+
+
+UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];writePrincipals(uid);
+;$MDDContentCatalog;Online;cmsmanagergroup,cmsmanager;
+;$MDDContentCatalog;Staged;cmsmanagergroup,cmsmanager;

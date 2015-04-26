@@ -1,0 +1,80 @@
+# Import essential data for the JNJ
+#
+# Includes:
+# * Languages
+# * Currencies
+# * Titles
+# * Vendors
+# * Warehouses
+# * Supported Credit/Debit cards
+# * User Groups
+# * DistanceUnits for Storelocator
+# * MediaFolders
+# * Media Formats
+# * Tax & Tax Groups
+# * Checkout Payment Types
+# * B2BPermission Types
+
+
+
+#
+# Import Language
+# 
+insert_update Language;fallbackLanguages(isocode);isocode[unique=true,allownull=true];name[lang=en]
+;;en;English
+;en;es;Spanish
+;en;fr;French
+;en;de;German
+
+
+# Currencies
+INSERT_UPDATE Currency;isocode[unique=true];conversion;digits;symbol;name[lang=en]
+;USD;1;2;$;USD
+;GBP;1;2;£;GBP
+;EUR;1;2;€;EUR
+;JPY;120;0;¥:JPY
+
+
+# Vendor
+INSERT_UPDATE Vendor;code[unique=true];name
+;default;Default Vendor
+
+# Warehouse
+INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default];default[default=true]
+;default;Default Warehouse;;true
+
+# Disable preview for email pages
+UPDATE CMSPageType;code[unique=true];previewDisabled
+;EmailPage;true
+
+# Titles
+INSERT_UPDATE Title;code[unique=true]
+;mr
+;mrs
+;miss
+;ms
+;dr
+;rev
+
+#Media Folders
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+;email-body;email-body
+;email-attachments;email-attachments
+;cartAttachments;cartAttachments
+;zonzaImages;zonzaImages
+
+#Required Media formats for product images
+insert_update MediaFormat;qualifier[unique=true];externalId;name
+;300Wx300H;300Wx300H;300Wx300H
+;30Wx30H;30Wx30H;30Wx30H
+;515Wx515H;515Wx515H;515Wx515H 
+;65Wx65H;65Wx65H;65Wx65H
+;96Wx96H;96Wx96H;96Wx96H
+
+#TODO Needs to be revisited
+INSERT_UPDATE ServicelayerJob; code[unique=true];springId[unique=true]
+;cartRemovalJob;cartRemovalJob
+
+
+

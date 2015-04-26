@@ -1,0 +1,44 @@
+insert_update UserGroup;description;locname[lang=en];uid[unique=true,allow null=true];
+;This is used for viewing catalog;View Catalog;viewCatalogGroup
+;This is used for requesting quote;Request Quote;requestQuoteGroup
+;This is used for searching order;Search Order;searchOrderGroup
+;This is used for placing order;Place Order;placeOrderGroup
+;This is used for editing users;Edit User;editUserGroup
+;This is used for creating user;Create User;createUserGroup
+;This is used for resetting other user's password;Reset Password;resetPasswordGroup
+;This is used for viewing other user security question;View Security Q/A;viewSecurityQAGroup
+
+insert_update UserGroup;description;locname[lang=en];uid[unique=true,allow null=true];groups(uid)[mode=append];
+;This is used for View Only Buyer;View Only;viewOnlyBuyerGroup;viewCatalogGroup,requestQuoteGroup,searchOrderGroup
+;This is used for View & Place Order Buyer;View & Place Orders;placeOrderBuyerGroup;viewCatalogGroup,requestQuoteGroup,placeOrderGroup,searchOrderGroup
+;This is used for View Only Sales Rep;View Only Sales Rep;viewOnlySalesRepGroup;viewCatalogGroup,requestQuoteGroup,searchOrderGroup
+;This is used for View & Place Order Sales Rep;View & Place Orders Sales Rep;placeOrderSalesGroup;viewCatalogGroup,requestQuoteGroup,placeOrderGroup,searchOrderGroup
+;This is used for Admin;Admin Group;jnjNaAdminGroup;viewCatalogGroup,requestQuoteGroup,searchOrderGroup,editUserGroup,createUserGroup,resetPasswordGroup,viewSecurityQAGroup,placeOrderGroup
+;This is used for CSR;CSR Group;jnjNaCsrGroup;viewCatalogGroup,requestQuoteGroup,placeOrderGroup,searchOrderGroup,editUserGroup,createUserGroup,resetPasswordGroup,viewSecurityQAGroup	
+
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;b2bcustomergroup;;;;;;;;
+;;;;B2BCustomer;+;+;+;-;-
+$END_USERRIGHTS;;;;;
+
+
+update SearchRestriction;code[unique=true];active
+;employee_restriction;false
+
+
+# JnJ Product manager group for Product Cockpit
+INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append]
+;jnjNAproductmanagergroup;cockpitgroup,employeegroup
+
+# Jnj Class Of Trade Group for broad cast message.
+#INSERT_UPDATE ClassOfTradeGroup;uid[unique=true];locName[lang=en]
+#;Trade;Trade
+#;Consumer_Affiliate;Consumer Affiliate
+#;House;House
+#;Hospital;Hospital
+#;Government;Government
+#;CSC;CSC
+#;Distributor;Distributor
+#;Sales_Rep_Account;Sales Rep Account
+#;International_Affiliate;International Affiliate

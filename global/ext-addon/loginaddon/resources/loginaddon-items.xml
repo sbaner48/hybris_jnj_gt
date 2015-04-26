@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+			<!-- JnjLink Component With Media -->
+			<itemtype code="JnjLinkComponent" extends="CMSLinkComponent"
+				autocreate="true" generate="true">
+				<attributes>
+					<attribute type="localized:Media" qualifier="details">
+						<modifiers optional="true" initial="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="shiftRight" type="java.lang.Boolean">
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<!-- End of JnjLink Component With Media -->
+			
+						<!-- Start of CR #31918 Changes: JnjParagraphComponent -->
+			<itemtype code="JnjParagraphComponent" extends="CMSParagraphComponent"
+				autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="componentVersion" type="java.lang.Long">
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+						<defaultvalue>Long.valueOf(1)</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<!-- End of CR #31918 Changes: JnjParagraphComponent -->
+		<!-- START : sanchit.a.kumar - item added for Survey -->
+		<itemtype code="JnjNASurveyLinkComponent" extends="CMSLinkComponent"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="surveyEnabled" type="boolean">
+					<persistence type="property" />
+					<defaultvalue>false</defaultvalue>
+					<description>This holds true if globally, survey is enabled. Else it holds false.</description>
+				</attribute>
+			</attributes>
+		</itemtype>			
+	</itemtypes>
+</items>

@@ -1,0 +1,25 @@
+#
+# Import Countries
+# Full country list conforming to ISO 3166-1 alpha-2
+#
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true]
+;DE;"Germany"
+;FR;"French"
+
+
+
+# ISO 3166-2:US states
+#
+INSERT_UPDATE Region;country(isocode)[unique=true];isocode[unique=true];name[lang=en];active[default=true]
+#;US;VI;"United States Virgin Islands"
+
+#
+# Temparory list of Canada States
+#
+INSERT_UPDATE Region;country(isocode)[unique=true];isocode[unique=true];name[lang=en];active[default=true]
+#;CA;YT;"Yukon"
+
+
+
+#INSERT_UPDATE Country;isocode[unique=true];phoneCode

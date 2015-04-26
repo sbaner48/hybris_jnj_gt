@@ -1,0 +1,481 @@
+# Impex ImportProcessor that injects all config properties as impex definitions.
+# All defined configuration properties are added as impex macro definitions with the prefix of "config-".
+# For example the config key mail.smtp.server can be accessed via the macro <tt>$config-mail.smtp.server
+# In order to use this import processor and to load the configuration properties the following must be added to the top of the impex file:
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+
+# NORTH AMERICA SITE
+# Import the CMS content for the JNJ NA site
+
+$contentCatalog=masterContentCatalog
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default='Staged'])
+$jarResourceCms=jar:com.jnj.b2b.masterstore.setup.JnjMasterStoreSystemSetup&/masterstore/import/sampledata/cockpits/cmscockpit
+
+
+
+# Create PageTemplates
+# These define the layout for pages
+# "FrontendTemplateName" is used to define the JSP that should be used to render the page for pages with multiple possible layouts.
+# "RestrictedPageTypes" is used to restrict templates to page types
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;JnjCategoryPageTemplate;Category Page Template;category/categoryPage;CategoryPage
+;;ProductDetailsPageTemplate;Product Details Page Template;product/productLayout1Page;ProductPage
+;;ReportsPageTemplate;Reports Page Template;;ContentPage
+;;SearchResultsListPageTemplate;Search Results List Page Template;search/searchListPage;ContentPage
+;;SearchResultsEmptyPageTemplate;Search Results Empty Page Template;search/searchEmptyPage;ContentPage
+;;JnjOrderHistoryPageTemplate;Order History Page Template;order/orderHistoryPage;;
+;;JnjOrderDetailPageTemplate;Order Detail Page Template;order/orderDetailPage;;
+;;JnjInvoiceDetailPageTemplate;Invoice Detail Page Template;invoice/invoiceDetailPage;;
+;;JnjOrderTemplatePageTemplate;Order Template Page Template;template/templateOrderPage;;
+;;JnjOrderTemplateDetailPageTemplate;Order Template Detail Page Template;template/templateOrderDetailPage;;
+;;HomePageTemplate;Home Page Template;;ContentPage
+;;LoginPageTemplate;Login Page Template;;ContentPage
+;;CartPageTemplate;Cart Page Template;;ContentPage
+;;OrderConfirmationPageTemplate;Order Confirmation Page Template;;ContentPage
+;;JnjNaMyProfilePageTemplate;My Profile Page Template ;;ContentPage;
+;;JnjResourcePageTemplate;Resource Page Template ;resource;ContentPage;
+;;LegalNoticePageTemplate;Legal Notice Page Template;Legal/legalNoticePage;ContentPage;
+;;TermsAndConditionsPageTemplate;Terms And Conditions Page Template;Terms/termsAndConditionsPage;ContentPage;
+;;PrivacyPolicyPageTemplate;Privacy Policy Page Template;misc/privacyPolicyPage;ContentPage;
+;;UpdatedPrivacyPolicyPageTemplate;Updated Privacy Policy Page Template;misc/updatedPrivacyPolicyPage;ContentPage;
+;;SurveyPageTemplate;Survey Page Template;misc/surveyPage;ContentPage;
+;;ProductListPageTemplate;Product List Page Template;category/productListPage;CategoryPage
+;;HelpPageTemplate;Help Page Template;pages/misc/helpPage;ContentPage
+;;ContactUsPageTemplate;Contact Us pop up Page Template;;ContentPage
+;;JnjCpsiaPageTemplate;Cpsia Page Template ;cpsia/cpsiaDetailPage;ContentPage;
+;;NoProductDetailsPageTemplate;Product Details Page Template;product/noProductDetailsPage;ProductPage
+
+
+# Add Velocity templates that are in the CMS Cockpit. These give a better layout for editing pages
+# The FileLoaderValueTranslator loads a File into a String property. The templates could also be inserted in-line in this file.
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+#;;JnjCategoryPageTemplate;$jarResourceCms/structure-view/structure_categoryPageTemplate.vm 	
+#;;CartPageTemplate             ;$jarResourceCms/structure-view/structure_cartPageTemplate.vm
+#;;OrderConfirmationPageTemplate;$jarResourceCms/structure-view/structure_orderConfirmationPageTemplate.vm
+#;;ProductDetailsPageTemplate;$jarResourceCms/structure-view/structure_productDetails2PageTemplate.vm
+#;;ProductListPageTemplate   ;$jarResourceCms/structure-view/structure_productListPageTemplate.vm
+
+# Content Slot Names for Static Pages NA
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true];validComponentTypes(code);compTypeGroup(code);
+;MainBody;LegalNoticePageTemplate;;wide
+;MainBody;PrivacyPolicyPageTemplate;;wide
+;MainBody;UpdatedPrivacyPolicyPageTemplate;;wide
+;MainBody;TermsAndConditionsPageTemplate;;wide
+;MainBody;SurveyPageTemplate;;wide
+
+
+# Common Content Slot Names for Home Page NA
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='HomePageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+#;BroadCast;;BroadcastMessage ;narrow
+
+# Content Slot Names for Login Page NA
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LoginPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;SideContent;;;narrow
+;MainBody;;;narrow
+;SideContentLogout;;;narrow
+;Footer;;;footer
+
+
+# Content Slot Names for Resource Page NA
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='JnjResourcePageTemplate'];validComponentTypes(code);compTypeGroup(code);
+;SiteLogo;;;logo
+;SideContent-ResourcePage;;;narrow
+;Footer;;;footer
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;MainBody;;;wide
+
+
+
+# Cart Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CartPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+
+# Order Confirmation Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OrderConfirmationPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default= JnjCategoryPageTemplate];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+# CONTENT SLOT NAMES FOR 'Search Results List Page Template'
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SearchResultsListPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+# CONTENT SLOT NAMES FOR 'Search Results Empty Page Template'
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SearchResultsEmptyPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+
+# CONTENT SLOT NAMES FOR 'Profile Page Template'
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true];validComponentTypes(code);compTypeGroup(code);
+;SiteLogo;JnjNaMyProfilePageTemplate;;logo
+;SideContentProfile;JnjNaMyProfilePageTemplate;;narrow
+;Footer;JnjNaMyProfilePageTemplate;;footer
+;MiniCart;JnjNaMyProfilePageTemplate;;minicart
+;TopNavigation;JnjNaMyProfilePageTemplate;;navigation
+
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default= JnjOrderHistoryPageTemplate];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default= JnjOrderDetailPageTemplate];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default= JnjInvoiceDetailPageTemplate];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default= JnjOrderTemplatePageTemplate];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default= JnjOrderTemplateDetailPageTemplate];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+
+# Product List Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ProductListPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+# Help Page Template
+# Common Content Slot Names for Help Page NA
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='HelpPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+;GeneralHelpTab;;;wide
+;OrderingHelpTab;;;wide
+;ReportsHelpTab;;;wide
+;ContactUs;;;wide
+;CallUs;;;wide
+
+# Contact Us Page Template
+# Common Content Slot Names for Help Page NA
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ContactUsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+;GeneralHelpTab;;;wide
+;OrderingHelpTab;;;wide
+;ReportsHelpTab;;;wide
+;ContactUs;;;wide
+;CallUsPopUp;;;wide
+
+
+# Common Content Slots for EMEA B2B Sites
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active[default=true]
+;;SiteLogoSlot;Jnj B2B Site Logo Slot
+;;footerContentSlot;Footer Content Slot
+;;topNavigationSlot;Top Navigation Slot
+;;MiniCartSlot;Mini Cart Slot
+;;LoginSideContentSlot;Login Side Component Slot
+;;LogoutSideContentSlot;Logout Side Component Slot
+;;registerSuccessContentSlot;Successful Registration Component Slot
+;;userActivationContentSlot;User Activation Component Slot
+;;activationSuccessSlot;Successful Activation Component Slot
+;;sideContent-ResourcePage; Side Content - Resource Page Slot
+;;UsefulLinksContent; Userful Links Content Slot
+;;TrainingResourceContent;Training Resource Content Slot
+;;LegalNoticeContSlot; Legal Notice Content Slot
+;;TermsAndConditionsContSlot;Terms and Conditions Content Slot
+;;PrivacyPolicyContSlot; Privacy Policy Content Slot
+;;UpdatedPrivacyPolicyContSlot; Updated Privacy Policy Content Slot
+;;SurveyContentSlot;Survey Content Slot
+;;MainContentSlot;Survey Component Main Content Slot
+;;sideContentProfile;Side Content Profile Slot
+;;generalHelpContentSlot;General Help Content Slot
+;;orderingHelpContentSlot;Ordering Help Content Slot
+;;reportsHelpContentSlot;Reports Help Content Slot
+;;contactUsContentSlot;Contact Us Help Content Slot
+;;callUsContentSlot;Call Us Help Content Slot
+;;topNavigationSlot;Top Navigation Slot
+;;ReportsSideContentSlot; Reports Side Content Slot
+;;BroadCastContentSlot;BroadCast Content Slot
+;;sideContent-CpsiaPage;sideContent-CpsiaPage Content Slot
+
+ # CONTENT SLOTS FOR 'Survey Page Template'
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SurveyPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;MainBody-SurveyPage;MainBody;;SurveyContentSlot;true
+
+# Content Slot For Template for Reports Page Template for NA
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ReportsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ReportsPage;SiteLogo;;SiteLogoSlot;true
+;;NavigationBar-ReportsPage;TopNavigation;;topNavigationSlot;true
+;;SideNavigation-ReportsPage;SideContent;;ReportsSideContentSlot;true
+;;MiniCart-ReportsPage;MiniCart;;MiniCartSlot;true
+;;Footer-ReportsPage;Footer;;footerContentSlot;true
+
+# Content Slot For Template for Home Page Template for NA
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='HomePageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-HomePage;SiteLogo;;SiteLogoSlot;true
+;;NavigationBar-HomePage;TopNavigation;;topNavigationSlot;true
+;;MiniCart-HomePage;MiniCart;;MiniCartSlot;true
+;;Footer-HomePage;Footer;;footerContentSlot;true
+;;BroadCast-HomPage;BroadCast;;BroadCastContentSlot;true
+
+# Content Slot For Template for Login Page Template for NA
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LoginPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-LoginPage;SiteLogo;;SiteLogoSlot;true
+;;SideContent-LoginPage;SideContent;;LoginSideContentSlot;true
+;;SideContentLogout-LoginPage;SideContentLogout;;LogoutSideContentSlot;true
+;;Footer-LoginPage;Footer;;footerContentSlot;true
+
+# Content Slot For Template for Cart Page Template for NA
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CartPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-CartPage;SiteLogo;;SiteLogoSlot;true
+;;NavigationBar-CartPage;TopNavigation;;topNavigationSlot;true
+;;MiniCart-CartPage;MiniCart;;MiniCartSlot;true
+;;Footer-CartPage;Footer;;footerContentSlot;true
+
+# Content Slot For Template for Order Confirmation Page Template for NA
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OrderConfirmationPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderConfirmationPage;SiteLogo;;SiteLogoSlot;true
+;;NavigationBar-OrderConfirmationPage;TopNavigation;;topNavigationSlot;true
+;;MiniCart-OrderConfirmationPage;MiniCart;;MiniCartSlot;true
+;;Footer-OrderConfirmationPage;Footer;;footerContentSlot;true
+
+# Content Slot For Template for Resource Page Template for NA
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+#;;sideContent;sideContent;
+#;sideContent;true
+;;sideContent-ResourcePage;sideContent-ResourcePage;JnjResourcePageTemplate;sideContent-ResourcePage;true
+;;MiniCart-ResourcePage;MiniCart;JnjResourcePageTemplate;MiniCartSlot;true
+;;TopNavigation-ResourcePage;TopNavigation;JnjResourcePageTemplate;topNavigationSlot;true
+;;Footer-ResourcePage;Footer;JnjResourcePageTemplate;footerContentSlot;true
+;;SiteLogo-ResourcePage;SiteLogo;JnjResourcePageTemplate;SiteLogoSlot;true
+
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-CategoryPage;SiteLogo;JnjCategoryPageTemplate;SiteLogoSlot;true
+;;MiniCart-CategoryPage;MiniCart;JnjCategoryPageTemplate;MiniCartSlot;true
+;;TopNavigation-CategoryPage;TopNavigation;JnjCategoryPageTemplate;topNavigationSlot;true
+;;Footer-CategoryPage;Footer;JnjCategoryPageTemplate;footerContentSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ProductPage;SiteLogo;ProductDetailsPageTemplate;SiteLogoSlot;true
+;;MiniCart-ProductPage;MiniCart;ProductDetailsPageTemplate;MiniCartSlot;true
+;;TopNavigation-ProductPage;TopNavigation;ProductDetailsPageTemplate;topNavigationSlot;true
+;;Footer-ProductPage;Footer;ProductDetailsPageTemplate;footerContentSlot;true
+
+
+# CONTENT SLOTS FOR 'Search Result Page Template'
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SearchResultsListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SearchResultsList;SiteLogo;;SiteLogoSlot;true
+;;NavigationBar-SearchResultsList;TopNavigation;;topNavigationSlot;true
+;;MiniCart-SearchResultsList;MiniCart;;MiniCartSlot;true
+;;Footer-SearchResultsList;Footer;;footerContentSlot;true
+
+# CONTENT SLOTS FOR 'Search Result Empty Page Template'
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SearchResultsEmptyPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SearchResultsEmpty;SiteLogo;;SiteLogoSlot;true
+;;NavigationBar-SearchResultsEmpty;TopNavigation;;topNavigationSlot;true
+;;MiniCart-SearchResultsEmpty;MiniCart;;MiniCartSlot;true
+;;Footer-SearchResultsEmpty;Footer;;footerContentSlot;true
+
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-MyProfileTemplate;SiteLogo;JnjNaMyProfilePageTemplate;SiteLogoSlot;true
+;;sideContentProfile;sideContentProfile;JnjNaMyProfilePageTemplate;sideContentProfile;true
+;;Content Slot;Footer;JnjNaMyProfilePageTemplate;footerContentSlot;true 
+;;MiniCart-ProfilePage;MiniCart;JnjNaMyProfilePageTemplate;MiniCartSlot;true
+;;TopNavigation-ProfilePage;TopNavigation;JnjNaMyProfilePageTemplate;topNavigationSlot;true
+
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderHistoryPage;SiteLogo;JnjOrderHistoryPageTemplate;SiteLogoSlot;true
+;;MiniCart-OrderHistoryPage;MiniCart;JnjOrderHistoryPageTemplate;MiniCartSlot;true
+;;TopNavigation-OrderHistoryPage;TopNavigation;JnjOrderHistoryPageTemplate;topNavigationSlot;true
+;;Footer-OrderHistoryPage;Footer;JnjOrderHistoryPageTemplate;footerContentSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderDetailPage;SiteLogo;JnjOrderDetailPageTemplate;SiteLogoSlot;true
+;;MiniCart-OrderDetailPage;MiniCart;JnjOrderDetailPageTemplate;MiniCartSlot;true
+;;TopNavigation-OrderDetailPage;TopNavigation;JnjOrderDetailPageTemplate;topNavigationSlot;true
+;;Footer-OrderDetailPage;Footer;JnjOrderDetailPageTemplate;footerContentSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-InvoiceDetailPage;SiteLogo;JnjInvoiceDetailPageTemplate;SiteLogoSlot;true
+;;MiniCart-InvoiceDetailPage;MiniCart;JnjInvoiceDetailPageTemplate;MiniCartSlot;true
+;;TopNavigation-InvoiceDetailPage;TopNavigation;JnjInvoiceDetailPageTemplate;topNavigationSlot;true
+;;Footer-InvoiceDetailPage;Footer;JnjInvoiceDetailPageTemplate;footerContentSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderTemplatePage;SiteLogo;JnjOrderTemplatePageTemplate;SiteLogoSlot;true
+;;MiniCart-OrderTemplatePage;MiniCart;JnjOrderTemplatePageTemplate;MiniCartSlot;true
+;;TopNavigation-OrderTemplatePage;TopNavigation;JnjOrderTemplatePageTemplate;topNavigationSlot;true
+;;Footer-OrderTemplatePage;Footer;JnjOrderTemplatePageTemplate;footerContentSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderTemplateDetailPage;SiteLogo;JnjOrderTemplateDetailPageTemplate;SiteLogoSlot;true
+;;MiniCart-OrderTemplateDetailPage;MiniCart;JnjOrderTemplateDetailPageTemplate;MiniCartSlot;true
+;;TopNavigation-OrderTemplateDetailPage;TopNavigation;JnjOrderTemplateDetailPageTemplate;topNavigationSlot;true
+;;Footer-OrderTemplateDetailPage;Footer;JnjOrderTemplateDetailPageTemplate;footerContentSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ProductListPage;SiteLogo;;SiteLogoSlot;true
+;;MiniCart-ProductListPage;MiniCart;;MiniCartSlot;true
+;;NavigationBar-ProductListPage;NavigationBar;;topNavigationSlot;true
+;;Footer-ProductListPage;Footer;;footerContentSlot;true
+
+# Content Slot For Template for Help Page Template for NA
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='HelpPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-HelpPage;SiteLogo;;SiteLogoSlot;true
+;;NavigationBar-HelpPage;TopNavigation;;topNavigationSlot;true
+;;MiniCart-HelpPage;MiniCart;;MiniCartSlot;true
+;;Footer-HelpPage;Footer;;footerContentSlot;true
+;;ContactUs-HelpPage;ContactUs;;contactUsContentSlot;true
+;;CallUs-HelpPage;CallUs;;callUsContentSlot;true
+;;General-HelpPage;GeneralHelpTab;;generalHelpContentSlot;true
+;;Ordering-HelpPage;OrderingHelpTab;;orderingHelpContentSlot;true
+;;Reports-HelpPage;ReportsHelpTab;;reportsHelpContentSlot;true
+
+# Content Slot For Template for Contact Us Page Template for NA
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ContactUsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;ContactUs-PagePopUp;ContactUsPopUp;;contactUsContentSlot;true
+;;CallUs-PagePopUp;CallUsPopUp;;callUsContentSlot;true
+
+# Content Slot For Template for CPSIA Page Template for NA
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;sideContent-CpsiaPage;sideContent-CpsiaPage;JnjCpsiaPageTemplate;sideContent-CpsiaPage;true
+;;MiniCart-CpsiaPage;MiniCart;JnjCpsiaPageTemplate;MiniCartSlot;true
+;;TopNavigation-CpsiaPage;TopNavigation;JnjCpsiaPageTemplate;topNavigationSlot;true
+;;Footer-CpsiaPage;Footer;JnjCpsiaPageTemplate;footerContentSlot;true
+;;SiteLogo-CpsiaPage;SiteLogo;JnjCpsiaPageTemplate;SiteLogoSlot;true
+
+
+
+# Content Slot Names for CPSIA Page NA
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='JnjCpsiaPageTemplate'];validComponentTypes(code);compTypeGroup(code);
+;SiteLogo;;;logo
+;SideContent-CpsiaPage;;;narrow
+;Footer;;;footer
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;MainBody;;;wide
+
+
+# Content Slots for Product Not found page
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='NoProductDetailsPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;MiniCart;;;minicart
+;TopNavigation;;;navigation
+;Footer;;;footer
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-NoProductPage;SiteLogo;NoProductDetailsPageTemplate;SiteLogoSlot;true
+;;MiniCart-NoProductPage;MiniCart;NoProductDetailsPageTemplate;MiniCartSlot;true
+;;TopNavigation-NoProductPage;TopNavigation;NoProductDetailsPageTemplate;topNavigationSlot;true
+;;Footer-NoProductPage;Footer;NoProductDetailsPageTemplate;footerContentSlot;true
+
+
+ # Functional Content Pages for NA
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+;;home;Home;HomePageTemplate;home
+;;login;Login;LoginPageTemplate;login;true
+;;backorderReportPage;Backorder Report Page;ReportsPageTemplate;Backorder Report Page
+;;cutReportPage;Cut Report Page;ReportsPageTemplate;Cut Report Page
+;;inventoryReportPage;Inventory Report Page;ReportsPageTemplate;Inventory Report Page
+;;purchaseAnalysisReportPage;Purchase Analysis Report Page;ReportsPageTemplate;Purchase Analysis Report Page
+;;register;Register;LoginPageTemplate;register
+;;registerSuccessPage;Register Success Page;LoginPageTemplate;registerSuccessPage
+;;userActivationPage;User Activation Page;LoginPageTemplate;userActivationPage
+;;activationSuccessPage;Activation Success Page;LoginPageTemplate;activationSuccessPage
+;;search;Search Results Page;SearchResultsListPageTemplate;search
+;;searchEmpty;Search Results Empty Page;SearchResultsEmptyPageTemplate;searchEmpty
+#;;singleStepCheckoutSummaryPage;Single Checkout Summary Page;SingleStepCheckoutSummaryPageTemplate;singleStepCheckoutSummary
+#;;multiStepCheckoutPage;Multi Step Checkout Page;MultiStepCheckoutPageTemplate;multiStepCheckout
+;;orderConfirmationPage;Order Confirmation Page;OrderConfirmationPageTemplate;orderConfirmation
+#;;replenishmentConfirmation;Replenishment Confirmation Page;OrderConfirmationPageTemplate;replenishmentConfirmation
+;;cartValidationPage;Cart Validation Page;CartPageTemplate;cartValidationPage
+;;cartCheckoutPage;Cart Checkout Page;CartPageTemplate;cartCheckoutPage
+#;;orderValidationPage;Order Validation Page;CartPageTemplate;orderValidationPage
+;;cartPage;Cart Page;CartPageTemplate;cart
+;;legalNoticePage;legal Notice Page;LegalNoticePageTemplate;Legal Label
+;;privacyPolicyPage;privacy Policy Page;PrivacyPolicyPageTemplate;Privacy Label
+;;updatedPrivacyPolicyPage;Updated Privacy Policy Page;UpdatedPrivacyPolicyPageTemplate;Updated Privacy Label
+;;termsAndConditionsPage;terms And Conditions Page;TermsAndConditionsPageTemplate;Terms Label
+;;surveyPage;survey Page;SurveyPageTemplate;Survey Label
+;;UsefulLinks;Useful Links ;JnjResourcePageTemplate;Useful Links
+;;TrainingResource; Training Resource ;JnjResourcePageTemplate;Training Resources
+;;Usermanagement;Usermanagement;JnjResourcePageTemplate;User Mangement
+#;;PoliciesAndFees;Policies And Fees ;JnjResourcePageTemplate;true;
+#;;TermsOfSale;Terms Of Sale;JnjResourcePageTemplate;true;
+;;personalInformation;Personal Information ;JnjNaMyProfilePageTemplate;Personal Information
+;;emailPreferences;Email Preferences;JnjNaMyProfilePageTemplate;Email Preferences
+;;changePassword;Change Password;JnjNaMyProfilePageTemplate;Change Password
+;;changeSecurityQuestion;Change Securityquestion;JnjNaMyProfilePageTemplate;Change Securityquestion
+;;addAccount;Add Account;JnjNaMyProfilePageTemplate;Add Account
+;;jnjOrderHistoryPage;Order History Page; JnjOrderHistoryPageTemplate;orderHistory
+;;jnjInvoiceDetailPage;Order Detail Page; JnjInvoiceDetailPageTemplate;invoiceDetail
+;;jnjOrderDetailPage;Order Detail Page; JnjOrderDetailPageTemplate;orderDetail
+;;orderTemplatePage;Order Template Page; JnjOrderTemplatePageTemplate;orderTemplate
+;;orderTemplateDetailPage;Order Template Detail Page; JnjOrderTemplateDetailPageTemplate;orderTemplateDetail
+;;helpPage;Help Page;HelpPageTemplate;Help Page
+;;my-company;My Company Page;JnjResourcePageTemplate;my-company
+;;organizationManagement;Create User Profile Page;JnjResourcePageTemplate;organizationManagement
+;;editUserProfile;Edit User Profile Page;JnjResourcePageTemplate;editUserProfile
+;;contactUs;Contact Us Page ;ContactUsPageTemplate;Contact Us Page.
+;;JnjCpsiaContentPage;Cpsia Page;JnjCpsiaPageTemplate;Cpsia
+;;noProductFoundPage;No Product Details;NoProductDetailsPageTemplate;No Product Details;
+
+
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);title;defaultPage[default='true'];approvalStatus(code)[default='approved']
+;;categoryPage;Category Page; JnjCategoryPageTemplate;category
+
+INSERT_UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;productDetailsPage;Product Details;ProductDetailsPageTemplate;true;
+
+
+
+# Category Pages
+INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);approvalStatus(code)[default='approved'];defaultPage
+;;productList;Product List Page;ProductListPageTemplate;;true
+

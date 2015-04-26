@@ -1,0 +1,1 @@
+ Approval  For Customer : ${ctx.approvedUserEmailDetail['userEmailAddress']}
